@@ -808,7 +808,7 @@ function animerBut() {
   overlay.classList.remove('actif');
   void overlay.offsetWidth;
   overlay.classList.add('actif');
-  setTimeout(() => overlay.classList.remove('actif'), 1700);
+  setTimeout(() => overlay.classList.remove('actif'), 3200);
 }
 function animerArret() {
   const overlay = document.getElementById('overlay-arret');

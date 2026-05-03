@@ -495,6 +495,109 @@ h1 {
   100% { opacity: 1; }
 }
 
+/* SCÈNE DU BUT — la mini-vidéo animée */
+.scene-but {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 600px;
+  height: 180px;
+  margin-bottom: 20px;
+}
+.patinoire-but {
+  position: absolute;
+  bottom: 30px;
+  left: 0; right: 0;
+  height: 8px;
+  background: linear-gradient(180deg, #e0f2fe, #bae6fd);
+  border-radius: 4px;
+  box-shadow: 0 0 20px rgba(59,130,246,0.6);
+}
+.joueur-tireur {
+  position: absolute;
+  bottom: 38px;
+  left: 8%;
+  font-size: 60px;
+  transform-origin: bottom center;
+  animation: joueurTire 2.5s ease-out forwards;
+}
+.baton {
+  position: absolute;
+  bottom: 60px;
+  left: 14%;
+  font-size: 40px;
+  transform-origin: bottom left;
+  animation: batonFrappe 0.5s 0.2s ease-out forwards;
+}
+.puck-tir {
+  position: absolute;
+  bottom: 42px;
+  left: 18%;
+  font-size: 28px;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.6));
+  animation: puckVole 1.2s 0.5s cubic-bezier(.4,0,.6,1) forwards;
+}
+.filet {
+  position: absolute;
+  bottom: 38px;
+  right: 10%;
+  font-size: 80px;
+  animation: filetSecoue 0.6s 1.6s ease-in-out;
+}
+.lampe-but {
+  position: absolute;
+  top: 0;
+  right: 12%;
+  font-size: 50px;
+  opacity: 0;
+  animation: lampeFlash 0.6s 1.6s steps(2, end) 4 alternate forwards;
+}
+.onde-but {
+  position: absolute;
+  bottom: 60px;
+  right: 12%;
+  width: 20px;
+  height: 20px;
+  border: 3px solid #fbbf24;
+  border-radius: 50%;
+  opacity: 0;
+  animation: ondeChoc 1s 1.6s ease-out forwards;
+}
+
+@keyframes joueurTire {
+  0%   { transform: translateX(0) scaleX(1); }
+  20%  { transform: translateX(-10px) scaleX(1); }
+  30%  { transform: translateX(20px) scaleX(1); }
+  100% { transform: translateX(20px) scaleX(1); }
+}
+@keyframes batonFrappe {
+  0%   { transform: rotate(-30deg); }
+  50%  { transform: rotate(40deg); }
+  100% { transform: rotate(20deg); }
+}
+@keyframes puckVole {
+  0%   { left: 18%;  bottom: 42px; transform: rotate(0); }
+  50%  { left: 55%;  bottom: 90px; transform: rotate(720deg); }
+  90%  { left: 80%;  bottom: 50px; transform: rotate(1500deg) scale(1.4); }
+  100% { left: 82%;  bottom: 45px; transform: rotate(1700deg) scale(0.8); opacity: 0; }
+}
+@keyframes filetSecoue {
+  0%   { transform: translateX(0) scale(1); }
+  20%  { transform: translateX(8px) scale(1.15); }
+  40%  { transform: translateX(-6px) scale(1.1); }
+  60%  { transform: translateX(4px) scale(1.05); }
+  80%  { transform: translateX(-2px) scale(1.02); }
+  100% { transform: translateX(0) scale(1); }
+}
+@keyframes lampeFlash {
+  0%   { opacity: 0; filter: drop-shadow(0 0 0 transparent); }
+  100% { opacity: 1; filter: drop-shadow(0 0 30px #ef4444) drop-shadow(0 0 50px #fbbf24); }
+}
+@keyframes ondeChoc {
+  0%   { opacity: 1; transform: scale(0); }
+  100% { opacity: 0; transform: scale(15); border-width: 1px; }
+}
+
 .but-texte {
   position: relative;
   z-index: 2;
@@ -506,7 +609,8 @@ h1 {
     0 0 40px #ef4444,
     0 0 60px #fbbf24;
   letter-spacing: 8px;
-  animation: butExplose 0.8s cubic-bezier(.5,1.7,.5,1) forwards;
+  animation: butExplose 0.8s 1.7s cubic-bezier(.5,1.7,.5,1) forwards;
+  opacity: 0;
 }
 .overlay-but.adverse .but-texte {
   font-size: 80px;
@@ -540,16 +644,16 @@ h1 {
   left: 50%;
   animation: confetti 1.6s ease-out forwards;
 }
-.but-confettis span:nth-child(1)  { animation-delay: 0.05s; --tx:  -300px; --ty: -250px; --rot: -180deg; }
-.but-confettis span:nth-child(2)  { animation-delay: 0.10s; --tx:   280px; --ty: -300px; --rot:  280deg; }
-.but-confettis span:nth-child(3)  { animation-delay: 0.15s; --tx:  -250px; --ty:  280px; --rot:  120deg; }
-.but-confettis span:nth-child(4)  { animation-delay: 0.20s; --tx:   320px; --ty:  250px; --rot: -240deg; }
-.but-confettis span:nth-child(5)  { animation-delay: 0.05s; --tx:   -50px; --ty: -380px; --rot:  360deg; }
-.but-confettis span:nth-child(6)  { animation-delay: 0.10s; --tx:    50px; --ty:  380px; --rot: -360deg; }
-.but-confettis span:nth-child(7)  { animation-delay: 0.15s; --tx:  -380px; --ty:  -50px; --rot:  200deg; }
-.but-confettis span:nth-child(8)  { animation-delay: 0.20s; --tx:   380px; --ty:   50px; --rot: -200deg; }
-.but-confettis span:nth-child(9)  { animation-delay: 0.25s; --tx:  -200px; --ty: -150px; --rot:  450deg; }
-.but-confettis span:nth-child(10) { animation-delay: 0.30s; --tx:   200px; --ty:  150px; --rot: -450deg; }
+.but-confettis span:nth-child(1)  { animation-delay: 1.65s; --tx:  -300px; --ty: -250px; --rot: -180deg; }
+.but-confettis span:nth-child(2)  { animation-delay: 1.70s; --tx:   280px; --ty: -300px; --rot:  280deg; }
+.but-confettis span:nth-child(3)  { animation-delay: 1.75s; --tx:  -250px; --ty:  280px; --rot:  120deg; }
+.but-confettis span:nth-child(4)  { animation-delay: 1.80s; --tx:   320px; --ty:  250px; --rot: -240deg; }
+.but-confettis span:nth-child(5)  { animation-delay: 1.65s; --tx:   -50px; --ty: -380px; --rot:  360deg; }
+.but-confettis span:nth-child(6)  { animation-delay: 1.70s; --tx:    50px; --ty:  380px; --rot: -360deg; }
+.but-confettis span:nth-child(7)  { animation-delay: 1.75s; --tx:  -380px; --ty:  -50px; --rot:  200deg; }
+.but-confettis span:nth-child(8)  { animation-delay: 1.80s; --tx:   380px; --ty:   50px; --rot: -200deg; }
+.but-confettis span:nth-child(9)  { animation-delay: 1.85s; --tx:  -200px; --ty: -150px; --rot:  450deg; }
+.but-confettis span:nth-child(10) { animation-delay: 1.90s; --tx:   200px; --ty:  150px; --rot: -450deg; }
 
 @keyframes confetti {
   0%   { transform: translate(-50%, -50%) scale(0) rotate(0); opacity: 1; }
