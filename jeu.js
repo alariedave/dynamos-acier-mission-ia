@@ -44,7 +44,7 @@ const questionsParMatch = [
       choix: [
         "Un robot avec des vraies émotions comme toi",
         "Un programme qui peut apprendre et résoudre des problèmes",
-        "Un humain qui vit dans un ordinateur",
+        "Une encyclopédie qui sait absolument toutes les réponses",
         "Une machine qui devine au hasard"
       ],
       bonne: 1,
@@ -70,8 +70,8 @@ const questionsParMatch = [
       choix: [
         "Oui, exactement comme nous",
         "Non, elle suit des statistiques sans vraie pensée",
-        "Oui, mais seulement la nuit",
-        "Oui, quand elle est fâchée"
+        "Un peu comme nous, mais en plus rapide",
+        "Oui, certaines IA très avancées le peuvent"
       ],
       bonne: 1,
       ok: "BUT! 🚨 L'IA prédit la meilleure réponse selon ses données. Impressionnant, mais pas comme un humain!",
@@ -110,10 +110,10 @@ const questionsParMatch = [
       robot: "Il faut ce dernier but!",
       question: "Pourquoi l'IA fait parfois des erreurs?",
       choix: [
-        "Elle est paresseuse",
+        "Parce que les humains sont meilleurs qu'elle",
         "Ses données d'apprentissage sont incomplètes ou biaisées",
-        "Elle dort",
-        "Elle a faim"
+        "Parce qu'elle est connectée à Internet",
+        "Parce que l'ordinateur est trop vieux"
       ],
       bonne: 1,
       ok: "BUT! 🚨 Si on lui apprend des choses incomplètes, elle se trompe!",
@@ -754,8 +754,10 @@ function choisir(index) {
     document.getElementById('score-nous').classList.add('but-marque');
     setTimeout(() => document.getElementById('score-nous').classList.remove('but-marque'), 600);
 
+    // 🚨 ANIMATION BUT!
+    animerBut();
+
     // En PROLONGATION : si correct, victoire instantanée (mort subite)
-    // Pas de but pour l'adversaire ici
     // En MATCH BOSS RÉGULIER : NOAH 2.0 marque AUSSI (ton égal)
     if (matchBoss && !enProlongation) {
       butsAdv++;
@@ -769,6 +771,9 @@ function choisir(index) {
     document.getElementById('score-adv').textContent = butsAdv;
     document.getElementById('score-adv').classList.add('but-marque');
     setTimeout(() => document.getElementById('score-adv').classList.remove('but-marque'), 600);
+
+    // 🥅 ANIMATION ARRÊT (adversaire marque)
+    animerArret();
   }
 
   afficherFeedback(correct, correct ? q.ok : q.nok);
@@ -797,6 +802,58 @@ function afficherFeedback(correct, message) {
 }
 
 // ---- QUESTION SUIVANTE ----
+// ---- ANIMATIONS BUT! / ARRÊT ----
+function animerBut() {
+  const overlay = document.getElementById('overlay-but');
+  overlay.classList.remove('actif');
+  void overlay.offsetWidth;
+  overlay.classList.add('actif');
+  setTimeout(() => overlay.classList.remove('actif'), 1700);
+}
+function animerArret() {
+  const overlay = document.getElementById('overlay-arret');
+  overlay.classList.remove('actif');
+  void overlay.offsetWidth;
+  overlay.classList.add('actif');
+  setTimeout(() => overlay.classList.remove('actif'), 1300);
+}
+
+// ---- CITATIONS ENTRE LES PÉRIODES ----
+const citationsPeriode = [
+  "📋 Coach Sylvain : 'Concentre-toi Noah!'",
+  "🎯 Bob : 'Vas-y mon ami, on est avec toi!'",
+  "🥅 Zazou : 'Je garde le filet, tu marques!'",
+  "🛡️ Zoé : 'Pas de panique, lis bien!'",
+  "🎯 Abigaël : 'T'es capable Noah!'",
+  "🛡️ ARIA : 'Réfléchis bien aux choix...'",
+  "📋 Coach : 'On peut les avoir!'",
+  "🎯 Bob : 'On y croit!'",
+  "🥅 Zazou : 'Belle passe en équipe!'",
+  "🛡️ ARIA : 'L'esprit critique, c'est ton arme!'"
+];
+
+function animerEntrePeriodes(callback) {
+  const overlay = document.getElementById('overlay-periode');
+  const fin = document.getElementById('overlay-fin');
+  const debut = document.getElementById('overlay-debut');
+  const citation = document.getElementById('overlay-citation');
+
+  fin.textContent = `FIN DE LA PÉRIODE ${questionActuelle}`;
+  debut.textContent = `PÉRIODE ${questionActuelle + 1}`;
+  citation.textContent = citationsPeriode[Math.floor(Math.random() * citationsPeriode.length)];
+
+  // Reset animations en retirant/remettant la classe
+  overlay.classList.remove('actif');
+  void overlay.offsetWidth; // force reflow
+  overlay.classList.add('actif');
+
+  // Cacher après 2.6s
+  setTimeout(() => {
+    overlay.classList.remove('actif');
+    callback();
+  }, 2600);
+}
+
 function questionSuivante() {
   // Si on était en prolongation, on va directement au résultat
   if (enProlongation) {
@@ -807,7 +864,8 @@ function questionSuivante() {
   questionActuelle++;
   const total = questionsParMatch[matchActuel].length;
   if (questionActuelle < total) {
-    afficherQuestion();
+    // Animation entre les périodes!
+    animerEntrePeriodes(() => afficherQuestion());
     return;
   }
 
