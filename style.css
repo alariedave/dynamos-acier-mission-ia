@@ -429,6 +429,29 @@ h1 {
 .btn-orange { background: linear-gradient(135deg, #dc2626, #f59e0b); color: white; }
 .btn-vert:hover, .btn-bleu:hover, .btn-orange:hover { transform: scale(1.05); }
 
+/* CRÉDIT CRÉATEUR */
+.credit {
+  margin-top: 30px;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(239,68,68,0.15));
+  border: 2px solid rgba(251,191,36,0.4);
+  border-radius: 14px;
+  text-align: center;
+  font-size: 16px;
+  color: #fef3c7;
+}
+.credit strong {
+  color: #fbbf24;
+  font-size: 22px;
+  background: linear-gradient(90deg, #fbbf24, #ef4444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.credit-petit {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
 /* RESPONSIVE */
 @media (max-width: 600px) {
   h1 { font-size: 28px; }
