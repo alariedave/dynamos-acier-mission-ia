@@ -577,7 +577,21 @@ let butsAdv = 0;
 let reponduActuelle = false;
 let enProlongation = false;
 let questionOTActuelle = null;
+let choixMelanges = [];      // ordre mélangé des choix affichés
+let bonneIndexMelange = 0;   // index de la bonne réponse APRÈS mélange
 let progression = chargerProgression(); // { 0: 3, 1: 2, ... } étoiles par match
+
+// ---- MÉLANGER LES CHOIX (pour que la bonne réponse change de place) ----
+function melangerChoix(question) {
+  // Crée un tableau d'objets {texte, estBonne} puis le mélange
+  const tab = question.choix.map((c, i) => ({ texte: c, estBonne: i === question.bonne }));
+  for (let i = tab.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [tab[i], tab[j]] = [tab[j], tab[i]];
+  }
+  choixMelanges = tab.map(x => x.texte);
+  bonneIndexMelange = tab.findIndex(x => x.estBonne);
+}
 
 // ---- LOCALSTORAGE ----
 function chargerProgression() {
@@ -700,13 +714,16 @@ function afficherQuestion() {
 
   document.getElementById('periode').textContent = etiquette;
 
+  // Mélange les choix à chaque affichage
+  melangerChoix(q);
+
   document.getElementById('zone-jeu').innerHTML = `
     <div class="carte">
       <div class="robot-parlant">🤖</div>
       <div class="bulle">${q.robot.replace(/\n/g, '<br>')}</div>
       <div class="question-texte">${q.question}</div>
       <div class="choix">
-        ${q.choix.map((c, i) => `
+        ${choixMelanges.map((c, i) => `
           <button class="btn-choix" onclick="choisir(${i})">${c}</button>
         `).join('')}
       </div>
@@ -720,13 +737,15 @@ function choisir(index) {
   if (reponduActuelle) return;
   reponduActuelle = true;
 
-  const q = questionsParMatch[matchActuel][questionActuelle];
+  const q = enProlongation
+    ? questionOTActuelle
+    : questionsParMatch[matchActuel][questionActuelle];
   const boutons = document.querySelectorAll('.btn-choix');
 
   boutons.forEach(b => b.disabled = true);
-  boutons[q.bonne].classList.add('correct');
+  boutons[bonneIndexMelange].classList.add('correct');
 
-  const correct = (index === q.bonne);
+  const correct = (index === bonneIndexMelange);
   const matchBoss = (matchActuel === 10);
 
   if (correct) {
