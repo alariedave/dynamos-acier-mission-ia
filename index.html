@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamos d'Acier 🏒 Mission IA</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ÉCRAN D'ACCUEIL -->
+  <div id="ecran-accueil" class="ecran actif">
+    <div class="logo">🏒</div>
+    <h1>LES DYNAMOS D'ACIER</h1>
+    <p class="sous-titre">Tournoi Mission IA — Marque des buts en répondant aux défis!</p>
+
+    <div class="equipe-bandeau">
+      <div class="poste"><span class="ico">🥅</span><span class="nom">Zazou</span><span class="pos">Gardien</span></div>
+      <div class="poste"><span class="ico">🛡️</span><span class="nom">Zoé</span><span class="pos">Défenseur</span></div>
+      <div class="poste"><span class="ico">🛡️</span><span class="nom">ARIA</span><span class="pos">Défenseur</span></div>
+      <div class="poste"><span class="ico">⭐</span><span class="nom">Noah</span><span class="pos">Centre</span></div>
+      <div class="poste"><span class="ico">🎯</span><span class="nom">Bob</span><span class="pos">Attaquant</span></div>
+      <div class="poste"><span class="ico">🎯</span><span class="nom">Abigaël</span><span class="pos">Attaquant</span></div>
+      <div class="poste"><span class="ico">📋</span><span class="nom">Sylvain</span><span class="pos">Coach</span></div>
+    </div>
+
+    <h2 class="titre-tournoi">🏆 Les 10 matchs du tournoi</h2>
+    <div id="liste-niveaux" class="niveaux"></div>
+
+    <button class="btn-reset" onclick="reinitialiserProgression()">🗑️ Recommencer le tournoi</button>
+  </div>
+
+  <!-- ÉCRAN VESTIAIRE (avant match) -->
+  <div id="ecran-vestiaire" class="ecran">
+    <div class="vestiaire-contenu">
+      <button class="btn-retour" onclick="retourAccueil()">← Menu</button>
+      <div class="vs-bloc">
+        <div class="equipe-vs">
+          <div class="logo-equipe">🏒</div>
+          <div class="nom-equipe">Dynamos d'Acier</div>
+        </div>
+        <div class="vs">VS</div>
+        <div class="equipe-vs adversaire">
+          <div id="logo-adv" class="logo-equipe">🦊</div>
+          <div id="nom-adv" class="nom-equipe">Les Renards</div>
+        </div>
+      </div>
+      <div class="coach-bulle">
+        <div class="coach-emoji">📋</div>
+        <div class="coach-texte">
+          <strong>Coach Sylvain :</strong>
+          <p id="coach-message"></p>
+        </div>
+      </div>
+      <button class="btn-suivant gros" onclick="commencerMatch()">🏒 COMMENCER LE MATCH</button>
+    </div>
+  </div>
+
+  <!-- ÉCRAN DE MATCH -->
+  <div id="ecran-jeu" class="ecran">
+    <div class="haut-jeu">
+      <button class="btn-retour" onclick="retourAccueil()">← Menu</button>
+      <div id="titre-niveau" class="titre-niveau"></div>
+      <div id="periode" class="periode">Période 1/3</div>
+    </div>
+
+    <div class="tableau-bord">
+      <div class="bord-equipe">
+        <div class="bord-nom">🏒 Dynamos</div>
+        <div id="score-nous" class="bord-score">0</div>
+      </div>
+      <div class="bord-vs">VS</div>
+      <div class="bord-equipe">
+        <div class="bord-nom" id="bord-adv-nom">🦊 Renards</div>
+        <div id="score-adv" class="bord-score">0</div>
+      </div>
+    </div>
+
+    <div id="zone-jeu"></div>
+  </div>
+
+  <!-- ÉCRAN DE RÉSULTAT -->
+  <div id="ecran-resultat" class="ecran">
+    <div class="resultat-contenu">
+      <div id="resultat-emoji" class="resultat-emoji">🏆</div>
+      <h2 id="resultat-titre"></h2>
+      <div id="resultat-score" class="resultat-score"></div>
+      <p id="resultat-message"></p>
+      <div id="resultat-etoiles" class="grande-etoiles"></div>
+      <div class="btns-resultat">
+        <button class="btn-vert" onclick="rejouer()">🔄 Rejouer le match</button>
+        <button class="btn-bleu" onclick="retourAccueil()">🏠 Menu</button>
+        <button id="btn-suivant-match" class="btn-orange" onclick="matchSuivant()" style="display:none">▶️ Match suivant</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="jeu.js"></script>
+</body>
+</html>

@@ -1,0 +1,438 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #0a1628 0%, #102a43 50%, #1e3a8a 100%);
+  min-height: 100vh;
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+
+/* ÉCRANS */
+.ecran {
+  display: none;
+  width: 100%;
+  max-width: 800px;
+  padding: 24px 16px;
+  flex-direction: column;
+  align-items: center;
+}
+.ecran.actif {
+  display: flex;
+}
+
+/* ACCUEIL */
+.logo {
+  font-size: 70px;
+  animation: rebondir 2s ease-in-out infinite;
+}
+@keyframes rebondir {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+h1 {
+  font-size: 38px;
+  font-weight: 900;
+  background: linear-gradient(90deg, #fbbf24, #ef4444, #fbbf24);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin: 8px 0;
+  letter-spacing: 2px;
+}
+
+.sous-titre {
+  font-size: 16px;
+  color: #a0aec0;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+/* BANDEAU ÉQUIPE */
+.equipe-bandeau {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 8px;
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 2px solid rgba(251,191,36,0.3);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 28px;
+}
+.poste {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.05);
+}
+.poste .ico { font-size: 24px; }
+.poste .nom { font-weight: 700; font-size: 14px; margin-top: 4px; }
+.poste .pos { font-size: 11px; color: #94a3b8; }
+
+/* TITRE TOURNOI */
+.titre-tournoi {
+  font-size: 22px;
+  margin-bottom: 16px;
+  color: #fbbf24;
+}
+
+/* NIVEAUX */
+.niveaux {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.btn-niveau {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: transform 0.2s, box-shadow 0.2s;
+  background: rgba(255,255,255,0.08);
+  color: white;
+  border: 2px solid rgba(255,255,255,0.15);
+  text-align: left;
+}
+.btn-niveau .num {
+  font-size: 20px;
+  font-weight: 900;
+  min-width: 32px;
+  color: #fbbf24;
+}
+.btn-niveau .ico-equipe { font-size: 26px; }
+.btn-niveau .txt { flex: 1; }
+.btn-niveau .difficulte {
+  font-size: 11px;
+  color: #94a3b8;
+  font-weight: 400;
+}
+.btn-niveau .etoiles { font-size: 16px; letter-spacing: 2px; min-width: 60px; text-align: right; }
+
+.btn-niveau.actif {
+  background: linear-gradient(135deg, #dc2626, #f59e0b);
+  border-color: #fbbf24;
+  box-shadow: 0 0 20px rgba(251,191,36,0.3);
+}
+.btn-niveau.actif:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 30px rgba(251,191,36,0.5);
+}
+.btn-niveau.verrouille {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.btn-niveau.termine {
+  background: linear-gradient(135deg, #047857, #10b981);
+  border-color: #34d399;
+  cursor: pointer;
+}
+.btn-niveau.termine:hover {
+  transform: scale(1.02);
+}
+
+.btn-reset {
+  background: rgba(239,68,68,0.2);
+  border: 1px solid rgba(239,68,68,0.4);
+  color: #fca5a5;
+  padding: 8px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.btn-reset:hover { background: rgba(239,68,68,0.4); }
+
+/* VESTIAIRE */
+.vestiaire-contenu {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+}
+
+.vs-bloc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+  margin-top: 20px;
+}
+.equipe-vs {
+  flex: 1;
+  text-align: center;
+  padding: 20px;
+  background: rgba(59,130,246,0.15);
+  border: 2px solid #3b82f6;
+  border-radius: 16px;
+}
+.equipe-vs.adversaire {
+  background: rgba(239,68,68,0.15);
+  border-color: #ef4444;
+}
+.logo-equipe { font-size: 48px; margin-bottom: 8px; }
+.nom-equipe { font-size: 18px; font-weight: 700; }
+.vs {
+  font-size: 32px;
+  font-weight: 900;
+  color: #fbbf24;
+}
+
+.coach-bulle {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  width: 100%;
+  background: rgba(251,191,36,0.1);
+  border: 2px solid rgba(251,191,36,0.4);
+  border-radius: 16px;
+  padding: 20px;
+}
+.coach-emoji { font-size: 48px; }
+.coach-texte { flex: 1; line-height: 1.5; }
+.coach-texte strong { color: #fbbf24; display: block; margin-bottom: 8px; }
+.coach-texte p { font-size: 15px; color: #e2e8f0; }
+
+.btn-suivant.gros {
+  font-size: 18px;
+  padding: 16px 40px;
+}
+
+/* HAUT DU MATCH */
+.haut-jeu {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 16px;
+  gap: 8px;
+}
+.btn-retour {
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.btn-retour:hover { background: rgba(255,255,255,0.2); }
+
+.titre-niveau {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fbbf24;
+  text-align: center;
+  flex: 1;
+}
+.periode {
+  font-size: 13px;
+  font-weight: 700;
+  background: rgba(255,255,255,0.1);
+  padding: 6px 12px;
+  border-radius: 16px;
+}
+
+/* TABLEAU DE BORD */
+.tableau-bord {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  border: 2px solid #334155;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+.bord-equipe { text-align: center; flex: 1; }
+.bord-nom { font-size: 14px; font-weight: 600; color: #cbd5e1; margin-bottom: 4px; }
+.bord-score {
+  font-size: 48px;
+  font-weight: 900;
+  color: #fbbf24;
+  font-family: 'Courier New', monospace;
+}
+.bord-score.but-marque {
+  animation: but 0.6s ease;
+}
+@keyframes but {
+  0% { transform: scale(1); color: #fbbf24; }
+  50% { transform: scale(1.5); color: #10b981; }
+  100% { transform: scale(1); color: #fbbf24; }
+}
+.bord-vs { font-size: 24px; font-weight: 900; color: #475569; }
+
+#zone-jeu { width: 100%; }
+
+/* CARTE DE QUESTION */
+.carte {
+  background: rgba(255,255,255,0.07);
+  border: 2px solid rgba(255,255,255,0.15);
+  border-radius: 18px;
+  padding: 24px;
+  text-align: center;
+}
+
+.robot-parlant {
+  font-size: 50px;
+  margin-bottom: 12px;
+}
+
+.bulle {
+  background: rgba(0,212,255,0.1);
+  border: 2px solid rgba(0,212,255,0.3);
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #e2e8f0;
+}
+
+.question-texte {
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+/* CHOIX */
+.choix {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-choix {
+  padding: 14px 18px;
+  border: 2px solid rgba(255,255,255,0.2);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.05);
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+.btn-choix:hover:not(:disabled) {
+  background: rgba(59,130,246,0.3);
+  border-color: #3b82f6;
+  transform: translateX(4px);
+}
+.btn-choix.correct {
+  background: rgba(16,185,129,0.25);
+  border-color: #10b981;
+}
+.btn-choix.mauvais {
+  background: rgba(239,68,68,0.25);
+  border-color: #ef4444;
+}
+
+/* FEEDBACK */
+.feedback {
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+  animation: apparaitre 0.3s ease;
+  text-align: left;
+}
+.feedback.ok {
+  background: rgba(16,185,129,0.15);
+  border: 2px solid #10b981;
+}
+.feedback.nok {
+  background: rgba(239,68,68,0.15);
+  border: 2px solid #ef4444;
+}
+.feedback strong { display: block; margin-bottom: 6px; font-size: 16px; }
+
+@keyframes apparaitre {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.btn-suivant {
+  margin-top: 14px;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #dc2626, #f59e0b);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.btn-suivant:hover { transform: scale(1.05); }
+
+/* RÉSULTAT */
+.resultat-contenu {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-top: 40px;
+}
+.resultat-emoji { font-size: 80px; }
+#resultat-titre { font-size: 32px; font-weight: 900; }
+.resultat-score {
+  font-size: 28px;
+  font-weight: 900;
+  color: #fbbf24;
+  font-family: 'Courier New', monospace;
+  background: rgba(0,0,0,0.3);
+  padding: 10px 24px;
+  border-radius: 14px;
+}
+#resultat-message { font-size: 16px; color: #cbd5e1; max-width: 500px; line-height: 1.5; }
+.grande-etoiles { font-size: 44px; letter-spacing: 8px; }
+
+.btns-resultat {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.btn-vert, .btn-bleu, .btn-orange {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.btn-vert { background: linear-gradient(135deg, #047857, #10b981); color: white; }
+.btn-bleu { background: linear-gradient(135deg, #1e40af, #3b82f6); color: white; }
+.btn-orange { background: linear-gradient(135deg, #dc2626, #f59e0b); color: white; }
+.btn-vert:hover, .btn-bleu:hover, .btn-orange:hover { transform: scale(1.05); }
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  h1 { font-size: 28px; }
+  .vs-bloc { gap: 12px; }
+  .logo-equipe { font-size: 36px; }
+  .bord-score { font-size: 36px; }
+}
