@@ -429,6 +429,44 @@ h1 {
 .btn-orange { background: linear-gradient(135deg, #dc2626, #f59e0b); color: white; }
 .btn-vert:hover, .btn-bleu:hover, .btn-orange:hover { transform: scale(1.05); }
 
+/* APERÇU DES ANIMATIONS */
+.apercu-bloc {
+  width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 2px solid rgba(123,47,247,0.4);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+.apercu-titre {
+  display: block;
+  font-size: 14px;
+  color: #c4b5fd;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.apercu-btns {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-apercu {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.2s;
+}
+.btn-apercu:hover { transform: scale(1.05); }
+.btn-apercu.but    { background: linear-gradient(135deg, #fbbf24, #ef4444); }
+.btn-apercu.arret  { background: linear-gradient(135deg, #7f1d1d, #ef4444); }
+.btn-apercu.periode { background: linear-gradient(135deg, #4f46e5, #06b6d4); }
+
 /* OVERLAY BUT! — célébration quand on marque */
 .overlay-but {
   display: none;

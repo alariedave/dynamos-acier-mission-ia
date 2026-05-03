@@ -818,6 +818,12 @@ function animerArret() {
   setTimeout(() => overlay.classList.remove('actif'), 1300);
 }
 
+// Aperçu de l'animation entre les périodes (depuis le menu)
+function apercuPeriode() {
+  questionActuelle = 1; // pour afficher "FIN DE LA PÉRIODE 1"
+  animerEntrePeriodes(() => {});
+}
+
 // ---- CITATIONS ENTRE LES PÉRIODES ----
 const citationsPeriode = [
   "📋 Coach Sylvain : 'Concentre-toi Noah!'",
